@@ -3,25 +3,27 @@ handle: spacecode-art
 updated: "2026-09-17"
 
 headline: >-
-  Cloud infrastructure & DevSecOps engineer building Atlas — a ten-phase,
-  production-grade platform, engineered end to end for $0 in cloud spend.
+  Cloud infrastructure and DevSecOps engineer. I build Atlas, a platform
+  covering landing zone, security, observability, networking, and the layers
+  above them.
 
 summary: >-
-  Atlas is not a tutorial portfolio. It is one platform built in sequence —
-  landing zone, security, observability, networking, resilience, platform
-  engineering, FinOps, automation, AI-assisted ops, reference architectures —
-  where every repository consumes the one before it. Every non-trivial decision
-  is written down as an ADR, including the wrong turns. Every phase ships with a
-  threat model, a cost model, and scan artifacts committed to the repo.
+  Atlas is one platform built in sequence rather than a set of unrelated
+  projects — each repository depends on the ones before it. Every repository
+  carries an architecture diagram, a decision record for each non-trivial
+  choice, a threat model, a cost model, and committed scan output.
 
-cloud_spend: "$0"
+approach: >-
+  Development runs against local emulators, Docker, and local Kubernetes, with
+  short burst deployments to real AWS where a design needs live validation.
+  Each repository documents what its architecture would cost running
+  continuously, separately from what it cost to build.
 
 principles:
-  - "**Production First** — if it wouldn't survive an audit, it isn't done"
-  - "**Security by Default** — scanned in CI, never bolted on afterwards"
-  - "**Everything as Code** — infra, policy, docs, changelog (this README included)"
-  - "**Cost Aware** — every architecture decision carries a dollar figure"
-  - "**Observable** — if you can't see it, you don't control it"
+  - "Infrastructure, policy, and documentation are all version-controlled and reviewed"
+  - "Security scanning runs in CI on every change rather than as a later pass"
+  - "Cost is treated as an architecture constraint, with a figure attached to each decision"
+  - "Decisions are recorded with their context and tradeoffs, including the ones that were reversed"
 
 stack:
   Infrastructure: [Terraform, Terratest, AWS, MiniStack, Docker]
