@@ -27,7 +27,7 @@ Phases are sequential — each repository consumes modules, policies, or telemet
 | 9 | AI-Assisted Ops | `atlas-ai` | An AI Terraform reviewer, incident commander, and cost advisor running on local open-weight models over the platform's own artifacts. | — | ○ Planned |
 | 10 | Reference Architectures | `atlas-reference-architectures` | Reference stacks synthesized from Phases 1–9 — architecture, Terraform, threat model, cost model, deployment guide. | — | ○ Planned |
 
-**Recorded sessions:** [Foundation](https://asciinema.org/a/IgoRlFyJlLNEODre) &nbsp;·&nbsp; [Security](https://asciinema.org/a/JzsLR4EylHwFOxA9) &nbsp;·&nbsp; [Observability](docs/demo/demo-preview.gif)
+**Recorded sessions:** [Foundation](https://asciinema.org/a/IgoRlFyJlLNEODre) &nbsp;·&nbsp; [Security](https://asciinema.org/a/JzsLR4EylHwFOxA9) &nbsp;·&nbsp; [Observability](https://youtu.be/RTcdDzRZSoA)
 
 ---
 

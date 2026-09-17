@@ -27,7 +27,7 @@ phases:
       Self-hosted LGTM stack and OpenTelemetry instrumentation on a real
       application, with Golden Signals dashboards built from real traffic.
     adrs: 4
-    demo: [View demo GIF](https://github.com/spacecode-art/atlas-observability/blob/main/docs/demo/demo-preview.gif)
+    demo: https://youtu.be/RTcdDzRZSoA
 
   - phase: 4
     name: Networking
