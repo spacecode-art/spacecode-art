@@ -1,0 +1,36 @@
+name: Dennis Kaninu
+handle: spacecode-art
+updated: "2026-09-17"
+
+headline: >-
+  Cloud infrastructure & DevSecOps engineer building Atlas — a ten-phase,
+  production-grade platform, engineered end to end for $0 in cloud spend.
+
+summary: >-
+  Atlas is not a tutorial portfolio. It is one platform built in sequence —
+  landing zone, security, observability, networking, resilience, platform
+  engineering, FinOps, automation, AI-assisted ops, reference architectures —
+  where every repository consumes the one before it. Every non-trivial decision
+  is written down as an ADR, including the wrong turns. Every phase ships with a
+  threat model, a cost model, and scan artifacts committed to the repo.
+
+cloud_spend: "$0"
+
+principles:
+  - "**Production First** — if it wouldn't survive an audit, it isn't done"
+  - "**Security by Default** — scanned in CI, never bolted on afterwards"
+  - "**Everything as Code** — infra, policy, docs, changelog (this README included)"
+  - "**Cost Aware** — every architecture decision carries a dollar figure"
+  - "**Observable** — if you can't see it, you don't control it"
+
+stack:
+  Infrastructure: [Terraform, Terratest, AWS, MiniStack, Docker]
+  Security: [Checkov, tfsec, Trivy, Semgrep, Gitleaks, Syft, Grype, Cosign, OPA/Conftest]
+  Observability: [Prometheus, Grafana, Loki, Tempo, OpenTelemetry, Alertmanager]
+  Platform: [Kubernetes, ArgoCD, Helm, GitHub Actions, Python, Bash]
+
+contact:
+  - label: LinkedIn
+    url: https://www.linkedin.com/in/CHANGE-ME
+  - label: Email
+    url: mailto:CHANGE-ME@example.com

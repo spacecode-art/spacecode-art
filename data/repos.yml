@@ -1,0 +1,86 @@
+phases:
+  - phase: 1
+    name: Foundation
+    repo: atlas-foundation
+    status: shipped
+    proves: >-
+      Multi-account AWS Organization, IAM Identity Center and SCP guardrails as
+      code, reusable Terraform modules with Terratest, plan-only CI gate.
+    adrs: 21
+    demo: https://asciinema.org/a/IgoRlFyJlLNEODre
+
+  - phase: 2
+    name: Security
+    repo: atlas-security
+    status: shipped
+    proves: >-
+      Policy-as-code and scanning as shared infrastructure — reusable workflows
+      version-pinned and consumed by other repos, not copy-pasted into each one.
+    adrs: 10
+    demo: https://asciinema.org/a/JzsLR4EylHwFOxA9
+
+  - phase: 3
+    name: Observability
+    repo: atlas-observability
+    status: shipped
+    proves: >-
+      Self-hosted LGTM stack and OpenTelemetry instrumentation on a real
+      application, with Golden Signals dashboards built from real traffic.
+    adrs: 4
+
+  - phase: 4
+    name: Networking
+    repo: atlas-network
+    status: active
+    proves: >-
+      Hub-and-spoke Transit Gateway with per-spoke route segmentation,
+      PrivateLink over peering, and a per-environment NAT cost strategy.
+    adrs: 7
+
+  - phase: 5
+    name: Resilience
+    repo: atlas-resilience
+    status: planned
+    proves: >-
+      Chaos engineering against a local cluster, a recorded Game Day, measured
+      RTO/RPO, and blameless postmortems.
+
+  - phase: 6
+    name: Platform Engineering
+    repo: atlas-platform
+    status: planned
+    proves: >-
+      A GitOps golden path — ArgoCD, Helm, and a one-command deploy that does
+      ten correct things quietly.
+
+  - phase: 7
+    name: FinOps
+    repo: atlas-finops
+    status: planned
+    proves: >-
+      A CUR analysis pipeline and an optimization recommendations engine that
+      treats cost as an architecture constraint.
+
+  - phase: 8
+    name: Automation
+    repo: atlas-automation
+    status: planned
+    proves: >-
+      Drift detection, orphaned-resource cleanup, and ChatOps alerting as a
+      maintained CLI tool.
+
+  - phase: 9
+    name: AI-Assisted Ops
+    repo: atlas-ai
+    status: planned
+    proves: >-
+      An AI Terraform reviewer, incident commander, and cost advisor running on
+      local open-weight models over the platform's own artifacts.
+
+  - phase: 10
+    name: Reference Architectures
+    repo: atlas-reference-architectures
+    status: planned
+    proves: >-
+      Reference stacks synthesized from Phases 1–9 — architecture, Terraform,
+      threat model, cost model, deployment guide.
