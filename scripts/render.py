@@ -53,12 +53,15 @@ def squash(text: str) -> str:
     return " ".join(text.split()).replace("|", "\\|")
 
 
-def progress_bar(phases: list[dict], width: int = 24) -> str:
+def progress_bar(phases: list[dict]) -> str:
     total = len(phases)
     done = sum(STATUS_WEIGHT[p["status"]] for p in phases)
-    filled = round(width * done / total)
     pct = round(100 * done / total)
-    return f"`{'█' * filled}{'░' * (width - filled)}` **{pct}%** — phase {int(done) + 1} of {total}"
+    badge = (
+        f"https://img.shields.io/badge/progress-{pct}%25-blue"
+        f"?style=flat-square"
+    )
+    return f"![progress]({badge}) — phase {int(done) + 1} of {total}"
 
 
 def repo_url(handle: str, repo: str) -> str:

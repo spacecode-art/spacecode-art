@@ -10,7 +10,7 @@ Development runs against local emulators, Docker, and local Kubernetes, with sho
 
 ## The Atlas Platform
 
-`████████░░░░░░░░░░░░░░░░` **35%** — phase 4 of 10
+![progress](https://img.shields.io/badge/progress-35%25-blue?style=flat-square) — phase 4 of 10
 
 Phases are sequential — each repository consumes modules, policies, or telemetry from the ones before it.
 
