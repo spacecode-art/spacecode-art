@@ -63,6 +63,6 @@ Decision records cover the problems as well as the designs — emulator persiste
 
 ## Contact
 
-[LinkedIn](https://www.linkedin.com/in/CHANGE-ME) &nbsp;·&nbsp; [Email](mailto:CHANGE-ME@example.com)
+[LinkedIn](https://www.linkedin.com/in/CHANGE-ME) &nbsp;·&nbsp; [Email](mailto:CHANGE-ME@denniskaninu254@gmail.com)
 
 <sub>Last updated 2026-09-17.</sub>
