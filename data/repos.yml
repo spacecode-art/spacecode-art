@@ -27,6 +27,7 @@ phases:
       Self-hosted LGTM stack and OpenTelemetry instrumentation on a real
       application, with Golden Signals dashboards built from real traffic.
     adrs: 4
+    demo: docs/demo/demo-preview.gif
 
   - phase: 4
     name: Networking
