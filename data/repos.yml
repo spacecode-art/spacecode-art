@@ -36,7 +36,7 @@ phases:
     proves: >-
       Hub-and-spoke Transit Gateway with per-spoke route segmentation,
       PrivateLink over peering, and a per-environment NAT cost strategy.
-    adrs: 7
+    adrs: 8
 
   - phase: 5
     name: Resilience
