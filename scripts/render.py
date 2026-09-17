@@ -18,9 +18,9 @@ DATA_DIR = ROOT / "data"
 README = ROOT / "README.md"
 
 STATUS_LABEL = {
-    "shipped": "● Complete",
-    "active": "◐ In progress",
-    "planned": "○ Planned",
+    "shipped": "🟢 Complete",
+    "active": "🟡 In progress",
+    "planned": "⚪ Planned",
 }
 STATUS_WEIGHT = {"shipped": 1.0, "active": 0.5, "planned": 0.0}
 

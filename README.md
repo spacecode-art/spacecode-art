@@ -16,16 +16,16 @@ Phases are sequential — each repository consumes modules, policies, or telemet
 
 | # | Phase | Repository | Scope | ADRs | Status |
 |---|---|---|---|---|---|
-| 1 | Foundation | [`atlas-foundation`](https://github.com/spacecode-art/atlas-foundation) | Multi-account AWS Organization, IAM Identity Center and SCP guardrails as code, reusable Terraform modules with Terratest, plan-only CI gate. | 21 | ● Complete |
-| 2 | Security | [`atlas-security`](https://github.com/spacecode-art/atlas-security) | Policy-as-code and scanning as shared infrastructure — reusable workflows version-pinned and consumed by other repos, not copy-pasted into each one. | 10 | ● Complete |
-| 3 | Observability | [`atlas-observability`](https://github.com/spacecode-art/atlas-observability) | Self-hosted LGTM stack and OpenTelemetry instrumentation on a real application, with Golden Signals dashboards built from real traffic. | 4 | ● Complete |
-| 4 | Networking | [`atlas-network`](https://github.com/spacecode-art/atlas-network) | Hub-and-spoke Transit Gateway with per-spoke route segmentation, PrivateLink over peering, and a per-environment NAT cost strategy. | 7 | ◐ In progress |
-| 5 | Resilience | `atlas-resilience` | Chaos engineering against a local cluster, a recorded Game Day, measured RTO/RPO, and blameless postmortems. | — | ○ Planned |
-| 6 | Platform Engineering | `atlas-platform` | A GitOps golden path — ArgoCD, Helm, and a one-command deploy that does ten correct things quietly. | — | ○ Planned |
-| 7 | FinOps | `atlas-finops` | A CUR analysis pipeline and an optimization recommendations engine that treats cost as an architecture constraint. | — | ○ Planned |
-| 8 | Automation | `atlas-automation` | Drift detection, orphaned-resource cleanup, and ChatOps alerting as a maintained CLI tool. | — | ○ Planned |
-| 9 | AI-Assisted Ops | `atlas-ai` | An AI Terraform reviewer, incident commander, and cost advisor running on local open-weight models over the platform's own artifacts. | — | ○ Planned |
-| 10 | Reference Architectures | `atlas-reference-architectures` | Reference stacks synthesized from Phases 1–9 — architecture, Terraform, threat model, cost model, deployment guide. | — | ○ Planned |
+| 1 | Foundation | [`atlas-foundation`](https://github.com/spacecode-art/atlas-foundation) | Multi-account AWS Organization, IAM Identity Center and SCP guardrails as code, reusable Terraform modules with Terratest, plan-only CI gate. | 21 | 🟢 Complete |
+| 2 | Security | [`atlas-security`](https://github.com/spacecode-art/atlas-security) | Policy-as-code and scanning as shared infrastructure — reusable workflows version-pinned and consumed by other repos, not copy-pasted into each one. | 10 | 🟢 Complete |
+| 3 | Observability | [`atlas-observability`](https://github.com/spacecode-art/atlas-observability) | Self-hosted LGTM stack and OpenTelemetry instrumentation on a real application, with Golden Signals dashboards built from real traffic. | 4 | 🟢 Complete |
+| 4 | Networking | [`atlas-network`](https://github.com/spacecode-art/atlas-network) | Hub-and-spoke Transit Gateway with per-spoke route segmentation, PrivateLink over peering, and a per-environment NAT cost strategy. | 7 | 🟡 In progress |
+| 5 | Resilience | `atlas-resilience` | Chaos engineering against a local cluster, a recorded Game Day, measured RTO/RPO, and blameless postmortems. | — | ⚪ Planned |
+| 6 | Platform Engineering | `atlas-platform` | A GitOps golden path — ArgoCD, Helm, and a one-command deploy that does ten correct things quietly. | — | ⚪ Planned |
+| 7 | FinOps | `atlas-finops` | A CUR analysis pipeline and an optimization recommendations engine that treats cost as an architecture constraint. | — | ⚪ Planned |
+| 8 | Automation | `atlas-automation` | Drift detection, orphaned-resource cleanup, and ChatOps alerting as a maintained CLI tool. | — | ⚪ Planned |
+| 9 | AI-Assisted Ops | `atlas-ai` | An AI Terraform reviewer, incident commander, and cost advisor running on local open-weight models over the platform's own artifacts. | — | ⚪ Planned |
+| 10 | Reference Architectures | `atlas-reference-architectures` | Reference stacks synthesized from Phases 1–9 — architecture, Terraform, threat model, cost model, deployment guide. | — | ⚪ Planned |
 
 **Recorded sessions:** [Foundation](https://asciinema.org/a/IgoRlFyJlLNEODre) &nbsp;·&nbsp; [Security](https://asciinema.org/a/JzsLR4EylHwFOxA9) &nbsp;·&nbsp; [Observability](https://youtu.be/RTcdDzRZSoA)
 
