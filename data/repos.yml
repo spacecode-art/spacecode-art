@@ -32,11 +32,13 @@ phases:
   - phase: 4
     name: Networking
     repo: atlas-network
-    status: active
+    status: shipped
     proves: >-
       Hub-and-spoke Transit Gateway with per-spoke route segmentation,
-      PrivateLink over peering, and a per-environment NAT cost strategy.
-    adrs: 8
+      PrivateLink over peering, and a per-environment NAT cost strategy —
+      proven on real AWS in a timed burst deploy, then torn down.
+    adrs: 11
+    demo: https://drive.google.com/file/d/1yjww9BCNU8GPGmnQmeDtHjTMlDnftsHp/view
 
   - phase: 5
     name: Resilience
