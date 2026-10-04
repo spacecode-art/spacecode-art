@@ -47,7 +47,7 @@ phases:
     proves: >-
       Chaos engineering against a local cluster, a recorded Game Day, measured
       RTO/RPO, and blameless postmortems.
-    addrs: 4
+    adrs: 4
 
   - phase: 6
     name: Platform Engineering
