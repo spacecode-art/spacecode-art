@@ -43,7 +43,7 @@ phases:
   - phase: 5
     name: Resilience
     repo: atlas-resilience
-    status: planned
+    status: active
     proves: >-
       Chaos engineering against a local cluster, a recorded Game Day, measured
       RTO/RPO, and blameless postmortems.

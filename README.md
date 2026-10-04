@@ -10,7 +10,7 @@ Development runs against local emulators, Docker, and local Kubernetes, with sho
 
 ## The Atlas Platform
 
-![progress](https://img.shields.io/badge/progress-40%25-blue?style=flat-square) — phase 5 of 10
+![progress](https://img.shields.io/badge/progress-45%25-blue?style=flat-square) — phase 5 of 10
 
 Phases are sequential — each repository consumes modules, policies, or telemetry from the ones before it.
 
@@ -20,7 +20,7 @@ Phases are sequential — each repository consumes modules, policies, or telemet
 | 2 | Security | [`atlas-security`](https://github.com/spacecode-art/atlas-security) | Policy-as-code and scanning as shared infrastructure — reusable workflows version-pinned and consumed by other repos, not copy-pasted into each one. | 10 | 🟢 Complete |
 | 3 | Observability | [`atlas-observability`](https://github.com/spacecode-art/atlas-observability) | Self-hosted LGTM stack and OpenTelemetry instrumentation on a real application, with Golden Signals dashboards built from real traffic. | 4 | 🟢 Complete |
 | 4 | Networking | [`atlas-network`](https://github.com/spacecode-art/atlas-network) | Hub-and-spoke Transit Gateway with per-spoke route segmentation, PrivateLink over peering, and a per-environment NAT cost strategy — proven on real AWS in a timed burst deploy, then torn down. | 11 | 🟢 Complete |
-| 5 | Resilience | `atlas-resilience` | Chaos engineering against a local cluster, a recorded Game Day, measured RTO/RPO, and blameless postmortems. | — | ⚪ Planned |
+| 5 | Resilience | [`atlas-resilience`](https://github.com/spacecode-art/atlas-resilience) | Chaos engineering against a local cluster, a recorded Game Day, measured RTO/RPO, and blameless postmortems. | — | 🟡 In progress |
 | 6 | Platform Engineering | `atlas-platform` | A GitOps golden path — ArgoCD, Helm, and a one-command deploy that does ten correct things quietly. | — | ⚪ Planned |
 | 7 | FinOps | `atlas-finops` | A CUR analysis pipeline and an optimization recommendations engine that treats cost as an architecture constraint. | — | ⚪ Planned |
 | 8 | Automation | `atlas-automation` | Drift detection, orphaned-resource cleanup, and ChatOps alerting as a maintained CLI tool. | — | ⚪ Planned |
