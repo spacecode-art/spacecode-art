@@ -1,23 +1,78 @@
 name: Dennis Kaninu
 handle: spacecode-art
-updated: "2026-10-03"
 
-headline: >-
-  Cloud infrastructure and DevSecOps engineer. I build Atlas, a platform
-  covering landing zone, security, observability, networking, and the layers
-  above them.
+headline: Cloud Infrastructure and DevSecOps Engineer
 
 summary: >-
-  Atlas is one platform built in sequence rather than a set of unrelated
-  projects — each repository depends on the ones before it. Every repository
-  carries an architecture diagram, a decision record for each non-trivial
-  choice, a threat model, a cost model, and committed scan output.
+  I design, secure, and document cloud infrastructure as code, treating
+  security, observability, and cost as design inputs rather than later passes.
+  My main project is Atlas, a ten-phase platform covering the AWS landing zone,
+  security tooling, observability, networking, resilience, and the delivery
+  layers above them. Each phase is a separate repository that builds on the
+  ones before it.
 
 approach: >-
-  Development runs against local emulators, Docker, and local Kubernetes, with
-  short burst deployments to real AWS where a design needs live validation.
-  Each repository documents what its architecture would cost running
-  continuously, separately from what it cost to build.
+  Atlas is developed against local emulators, Docker, and local Kubernetes.
+  Where a design needs validation on real infrastructure, it is burst-deployed
+  to AWS, recorded, and torn down. Each repository states what its architecture
+  would cost to run continuously, separately from what it cost to build.
+
+platform_intro: >-
+  One repository per phase, built in sequence. Later phases consume modules,
+  policies, and telemetry from earlier ones.
+
+standard:
+  intro: >-
+    Each repository is built to the same documentation and validation standard.
+  items:
+    - "**Architecture:** diagrams and data-flow documentation, with technology choices and their trade-offs"
+    - "**Decisions:** architecture decision records covering what was tried, what failed, and what was chosen, including decisions that were later reversed"
+    - "**Security:** threat model, security review, and committed scan output"
+    - "**Cost:** the designed cost of running the architecture continuously, alongside the actual cost of building it"
+    - "**Delivery:** CI on every pull request; Terraform repositories use a plan-only gate and never apply from CI"
+    - "**Operations:** incident runbook and blameless postmortems"
+    - "**Evidence:** burst deployments are recorded, with the teardown confirmation captured"
+
+decisions_intro: >-
+  A sample of the records, chosen to show how problems were diagnosed and what
+  was decided.
+
+decisions:
+  - repo: atlas-foundation
+    title: "State locking routed to the wrong endpoint"
+    summary: >-
+      A backend configuration error sent state-lock requests to real AWS instead
+      of the local emulator. This and the later migration to MiniStack, after
+      the previous emulator discontinued free-tier persistence, are recorded as
+      decisions.
+  - repo: atlas-network
+    path: docs/adr/ADR-0002-tgw-route-segmentation.md
+    title: "Per-spoke Transit Gateway route tables"
+    summary: >-
+      Dev and prod spokes cannot route to each other through the hub by default.
+      Segmentation is enforced in routing and evidenced from the route tables
+      captured during the burst deployment.
+  - repo: atlas-network
+    path: docs/adr/ADR-0004-nat-strategy-per-environment.md
+    title: "NAT strategy per environment"
+    summary: >-
+      Single-AZ NAT in dev for cost, per-AZ NAT in prod for availability, with
+      the monthly cost difference between them calculated.
+  - repo: atlas-network
+    path: docs/adr/ADR-0011-reachability-analyzer-dev-to-prod-open-finding.md
+    title: "An open finding, documented"
+    summary: >-
+      The Reachability Analyzer dev-to-prod analysis failed after the permission
+      fix and the cause was not determined. Route tables are used as the
+      segmentation evidence, and the follow-up is recorded.
+  - repo: atlas-resilience
+    path: docs/adr/ADR-0004-per-replica-telemetry-identity.md
+    title: "Per-replica telemetry identity"
+    summary: >-
+      Three replicas reported as one metric series because no pod identity
+      reached the Collector. Setting service.instance.id from the pod name
+      through the downward API gave three series, with before and after
+      evidence committed.
 
 principles:
   - "Infrastructure, policy, and documentation are all version-controlled and reviewed"
@@ -26,10 +81,10 @@ principles:
   - "Decisions are recorded with their context and tradeoffs, including the ones that were reversed"
 
 stack:
-  Infrastructure: [Terraform, Terratest, AWS, MiniStack, Docker]
+  Infrastructure: ["AWS (Organizations, IAM Identity Center, VPC, Transit Gateway, PrivateLink)", Terraform, Terratest, MiniStack, Docker]
   Security: [Checkov, tfsec, Trivy, Semgrep, Gitleaks, Syft, Grype, Cosign, OPA/Conftest]
   Observability: [Prometheus, Grafana, Loki, Tempo, OpenTelemetry, Alertmanager]
-  Platform: [Kubernetes, ArgoCD, Helm, GitHub Actions, Python, Bash]
+  Platform: [Kubernetes, kind, Chaos Mesh, GitHub Actions, Python, Bash]
 
 contact:
   - label: LinkedIn
