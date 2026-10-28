@@ -86,7 +86,7 @@ def phase_table(handle: str, phases: list[dict]) -> list[str]:
         repo = p["repo"]
         link = (
             f"[`{repo}`]({repo_url(handle, repo)})"
-            if p["status"] == "shipped"
+            if p["status"] in {"shipped", "active"}
             else f"`{repo}`"
         )
         cells = [f"{p['phase']}. {p['name']}", link, squash(p["proves"])]
