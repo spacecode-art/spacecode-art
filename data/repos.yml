@@ -4,8 +4,9 @@ phases:
     repo: atlas-foundation
     status: shipped
     proves: >-
-      Multi-account AWS Organization, IAM Identity Center and SCP guardrails as
-      code, reusable Terraform modules with Terratest, plan-only CI gate.
+      Multi-account AWS Organization with IAM Identity Center and SCP guardrails
+      as code, reusable Terraform modules tested with Terratest, and a
+      plan-only CI gate.
     adrs: 21
     demo: https://asciinema.org/a/IgoRlFyJlLNEODre
 
@@ -14,8 +15,9 @@ phases:
     repo: atlas-security
     status: shipped
     proves: >-
-      Policy-as-code and scanning as shared infrastructure — reusable workflows
-      version-pinned and consumed by other repos, not copy-pasted into each one.
+      Policy-as-code and security scanning are delivered as shared,
+      version-pinned reusable workflows consumed by the other Atlas
+      repositories.
     adrs: 10
     demo: https://asciinema.org/a/JzsLR4EylHwFOxA9
 
@@ -34,9 +36,10 @@ phases:
     repo: atlas-network
     status: shipped
     proves: >-
-      Hub-and-spoke Transit Gateway with per-spoke route segmentation,
-      PrivateLink over peering, and a per-environment NAT cost strategy —
-      proven on real AWS in a timed burst deploy, then torn down.
+      Hub-and-spoke Transit Gateway with per-spoke route tables, PrivateLink in
+      place of VPC peering for service exposure, and a per-environment NAT cost
+      strategy. Validated on real AWS in a timed burst deployment, then torn
+      down.
     adrs: 11
     demo: https://drive.google.com/file/d/1yjww9BCNU8GPGmnQmeDtHjTMlDnftsHp/view
 
@@ -45,8 +48,8 @@ phases:
     repo: atlas-resilience
     status: active
     proves: >-
-      Chaos engineering against a local cluster, a recorded Game Day, measured
-      RTO/RPO, and blameless postmortems.
+      Chaos engineering with Chaos Mesh against a local kind cluster, a
+      recorded Game Day, measured RTO/RPO, and blameless postmortems.
     adrs: 4
 
   - phase: 6
@@ -54,37 +57,39 @@ phases:
     repo: atlas-platform
     status: planned
     proves: >-
-      A GitOps golden path — ArgoCD, Helm, and a one-command deploy that does
-      ten correct things quietly.
+      A GitOps golden path with ArgoCD and Helm, and a single-command
+      application deploy.
 
   - phase: 7
     name: FinOps
     repo: atlas-finops
     status: planned
     proves: >-
-      A CUR analysis pipeline and an optimization recommendations engine that
-      treats cost as an architecture constraint.
+      A CUR analysis pipeline and cost-optimization recommendation engine,
+      using billing data from the Atlas burst deployments, with any synthetic
+      data clearly labelled.
 
   - phase: 8
     name: Automation
     repo: atlas-automation
     status: planned
     proves: >-
-      Drift detection, orphaned-resource cleanup, and ChatOps alerting as a
-      maintained CLI tool.
+      A CLI tool for drift detection, orphaned-resource cleanup, and ChatOps
+      alerting.
 
   - phase: 9
     name: AI-Assisted Ops
     repo: atlas-ai
     status: planned
     proves: >-
-      An AI Terraform reviewer, incident commander, and cost advisor running on
-      local open-weight models over the platform's own artifacts.
+      A Terraform change reviewer, incident-response assistant, and cost
+      advisor, running on local open-weight models against the platform's own
+      artifacts.
 
   - phase: 10
     name: Reference Architectures
     repo: atlas-reference-architectures
     status: planned
     proves: >-
-      Reference stacks synthesized from Phases 1–9 — architecture, Terraform,
-      threat model, cost model, deployment guide.
+      Reference stacks synthesized from Phases 1–9: architecture, Terraform,
+      threat model, cost model, and deployment guide.

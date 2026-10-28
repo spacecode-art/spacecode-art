@@ -17,12 +17,7 @@ ROOT = pathlib.Path(__file__).resolve().parents[1]
 DATA_DIR = ROOT / "data"
 README = ROOT / "README.md"
 
-STATUS_LABEL = {
-    "shipped": "🟢 Complete",
-    "active": "🟡 In progress",
-    "planned": "⚪ Planned",
-}
-STATUS_WEIGHT = {"shipped": 1.0, "active": 0.5, "planned": 0.0}
+VALID_STATUSES = {"shipped", "active", "planned"}
 
 
 def load(filename: str) -> dict:
@@ -41,11 +36,21 @@ def validate(phases: list[dict]) -> None:
         for field in ("phase", "name", "repo", "status", "proves"):
             if not entry.get(field):
                 sys.exit(f"error: phase {entry.get('phase', '?')} missing '{field}'")
-        if entry["status"] not in STATUS_WEIGHT:
+        if entry["status"] not in VALID_STATUSES:
             sys.exit(f"error: unknown status '{entry['status']}' on {entry['repo']}")
         if entry["repo"] in seen:
             sys.exit(f"error: duplicate repo '{entry['repo']}'")
         seen.add(entry["repo"])
+
+
+def validate_decisions(decisions: list[dict], phases: list[dict]) -> None:
+    repos = {p["repo"] for p in phases}
+    for item in decisions:
+        for field in ("repo", "title", "summary"):
+            if not item.get(field):
+                sys.exit(f"error: decision missing '{field}': {item}")
+        if item["repo"] not in repos:
+            sys.exit(f"error: decision references unknown repo '{item['repo']}'")
 
 
 def squash(text: str) -> str:
@@ -53,19 +58,44 @@ def squash(text: str) -> str:
     return " ".join(text.split()).replace("|", "\\|")
 
 
-def progress_bar(phases: list[dict]) -> str:
-    total = len(phases)
-    done = sum(STATUS_WEIGHT[p["status"]] for p in phases)
-    pct = round(100 * done / total)
-    badge = (
-        f"https://img.shields.io/badge/progress-{pct}%25-blue"
-        f"?style=flat-square"
-    )
-    return f"![progress]({badge}) — phase {int(done) + 1} of {total}"
-
-
 def repo_url(handle: str, repo: str) -> str:
     return f"https://github.com/{handle}/{repo}"
+
+
+def decision_url(handle: str, decision: dict) -> str:
+    base = repo_url(handle, decision["repo"])
+    path = decision.get("path")
+    return f"{base}/blob/HEAD/{path}" if path else base
+
+
+def phase_table(handle: str, phases: list[dict]) -> list[str]:
+    show_adrs = any(p.get("adrs") for p in phases)
+    show_evidence = any(p.get("demo") for p in phases)
+
+    headers = ["Phase", "Repository", "Scope"]
+    if show_adrs:
+        headers.append("ADRs")
+    if show_evidence:
+        headers.append("Evidence")
+
+    rows = [
+        "| " + " | ".join(headers) + " |",
+        "|" + "|".join("---" for _ in headers) + "|",
+    ]
+    for p in phases:
+        repo = p["repo"]
+        link = (
+            f"[`{repo}`]({repo_url(handle, repo)})"
+            if p["status"] == "shipped"
+            else f"`{repo}`"
+        )
+        cells = [f"{p['phase']}. {p['name']}", link, squash(p["proves"])]
+        if show_adrs:
+            cells.append(str(p["adrs"]) if p.get("adrs") else "—")
+        if show_evidence:
+            cells.append(f"[Recording]({p['demo']})" if p.get("demo") else "—")
+        rows.append("| " + " | ".join(cells) + " |")
+    return rows
 
 
 def render(profile: dict, phases: list[dict]) -> str:
@@ -76,9 +106,8 @@ def render(profile: dict, phases: list[dict]) -> str:
     # --- Header -------------------------------------------------------------
     add(f"# {profile['name']}")
     add("")
-    add(f"> {squash(profile['headline'])}")
+    add(f"**{squash(profile['headline'])}**")
     add("")
-
     add(squash(profile["summary"]))
     add("")
     add(squash(profile["approach"]))
@@ -86,60 +115,34 @@ def render(profile: dict, phases: list[dict]) -> str:
     add("---")
     add("")
 
-    # --- Progress -----------------------------------------------------------
+    # --- Platform -----------------------------------------------------------
     add("## The Atlas Platform")
     add("")
-    add(progress_bar(phases))
+    add(squash(profile["platform_intro"]))
     add("")
-    add(
-        "Phases are sequential — each repository consumes modules, policies, or "
-        "telemetry from the ones before it."
-    )
+    lines.extend(phase_table(handle, phases))
     add("")
-    add("| # | Phase | Repository | Scope | ADRs | Status |")
-    add("|---|---|---|---|---|---|")
-    for p in phases:
-        repo = p["repo"]
-        link = f"[`{repo}`]({repo_url(handle, repo)})" if p["status"] != "planned" else f"`{repo}`"
-        adr = str(p["adrs"]) if p.get("adrs") else "—"
-        add(
-            f"| {p['phase']} | {p['name']} | {link} | {squash(p['proves'])} "
-            f"| {adr} | {STATUS_LABEL[p['status']]} |"
-        )
-    add("")
-
-    # --- Evidence -----------------------------------------------------------
-    recorded = [p for p in phases if p.get("demo")]
-    if recorded:
-        add("**Recorded sessions:** " + " &nbsp;·&nbsp; ".join(
-            f"[{p['name']}]({p['demo']})" for p in recorded
-        ))
-        add("")
-
     add("---")
     add("")
 
-    # --- Reading guide ------------------------------------------------------
-    add("## What's in each repository")
+    # --- Repository standard ------------------------------------------------
+    add("## Repository standard")
     add("")
-    add(
-        "- **Designed and validated** — Terraform passing `validate` and `plan`, "
-        "Terratest suites, committed Checkov, tfsec, Trivy, and Semgrep output, "
-        "architecture diagrams, threat model, decision records."
-    )
-    add(
-        "- **Live validation** — burst deployments to real infrastructure, "
-        "recorded, with the `terraform destroy` confirmation captured alongside "
-        "the run."
-    )
+    add(squash(profile["standard"]["intro"]))
     add("")
-    add(
-        "Decision records cover the problems as well as the designs — emulator "
-        "persistence limits, a backend configuration bug that routed state locks "
-        "to the wrong endpoint, a mid-project tooling migration after a vendor "
-        "changed its free tier. Each one records what was tried, what broke, and "
-        "what was decided."
-    )
+    for item in profile["standard"]["items"]:
+        add(f"- {item}")
+    add("")
+    add("---")
+    add("")
+
+    # --- Decisions ----------------------------------------------------------
+    add("## Selected engineering decisions")
+    add("")
+    add(squash(profile["decisions_intro"]))
+    add("")
+    for d in profile["decisions"]:
+        add(f"- **[{d['title']}]({decision_url(handle, d)})**: {squash(d['summary'])}")
     add("")
     add("---")
     add("")
@@ -167,8 +170,6 @@ def render(profile: dict, phases: list[dict]) -> str:
     add("")
     add(" &nbsp;·&nbsp; ".join(f"[{c['label']}]({c['url']})" for c in profile["contact"]))
     add("")
-    add(f"<sub>Last updated {profile['updated']}.</sub>")
-    add("")
 
     return "\n".join(lines)
 
@@ -185,6 +186,7 @@ def main() -> int:
     profile = load("profile.yml")
     phases = sorted(load("repos.yml")["phases"], key=lambda p: p["phase"])
     validate(phases)
+    validate_decisions(profile["decisions"], phases)
     output = render(profile, phases)
 
     if args.check:
