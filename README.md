@@ -1,4 +1,4 @@
-# Dennis Kaninu
+# Dennis Kaninu Wambui
 
 **Cloud Infrastructure and DevSecOps Engineer**
 

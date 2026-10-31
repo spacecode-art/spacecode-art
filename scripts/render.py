@@ -1,4 +1,3 @@
-#!/usr/bin/env python3
 """Render README.md from data/*.yml.
 
 The README is a build artifact. Edit data/, never README.md.
