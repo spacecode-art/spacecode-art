@@ -50,7 +50,7 @@ phases:
     proves: >-
       Chaos engineering with Chaos Mesh against a local kind cluster, a
       recorded Game Day, measured RTO/RPO, and blameless postmortems.
-    adrs: 4
+    adrs: 5
 
   - phase: 6
     name: Platform Engineering
