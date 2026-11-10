@@ -92,7 +92,8 @@ def phase_table(handle: str, phases: list[dict]) -> list[str]:
         if show_adrs:
             cells.append(str(p["adrs"]) if p.get("adrs") else "—")
         if show_evidence:
-            cells.append(f"[Recording]({p['demo']})" if p.get("demo") else "—")
+            label = p.get("demo_label", "Recording")
+            cells.append(f"[{label}]({p['demo']})" if p.get("demo") else "—")
         rows.append("| " + " | ".join(cells) + " |")
     return rows
 

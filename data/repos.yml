@@ -48,9 +48,16 @@ phases:
     repo: atlas-resilience
     status: active
     proves: >-
-      Chaos engineering with Chaos Mesh against a local kind cluster, a
-      recorded Game Day, measured RTO/RPO, and blameless postmortems.
+      Six failure scenarios against a real application on a local three-zone
+      kind cluster. SC-01–SC-04 have measured local runs (60 s SC-01 RTO; 90 s
+      SC-03 and SC-04 RTO); SC-05 and SC-06 are synthetic tabletop rehearsals.
+      Includes operator runbooks, postmortems, request-ID replay evidence that
+      recovered 12 of 12 unacknowledged sales, and a volume-loss drill that
+      exposed 150 acknowledged sales after a 187 s-old backup. Results are
+      scoped as local observations, not general availability claims.
     adrs: 5
+    demo_label: SC-04 demo
+    demo: https://drive.google.com/file/d/1SHNW-F4W-AL_ygm3cPUmxkAM6TDuw5Ri/view?usp=sharing
 
   - phase: 6
     name: Platform Engineering
