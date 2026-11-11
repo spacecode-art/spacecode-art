@@ -62,10 +62,11 @@ phases:
   - phase: 6
     name: Platform Engineering
     repo: atlas-platform
-    status: planned
+    status: active
     proves: >-
       A GitOps golden path with ArgoCD and Helm, and a single-command
       application deploy.
+    adrs: 3
 
   - phase: 7
     name: FinOps
